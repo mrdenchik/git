@@ -16,14 +16,15 @@ fi
 cntx="users"
 page=1
 
-until(($page -lt $max_page))
+while [ $page -lt $max_page ]
 do
- curl -s https:/api.github.com/$cntx/$username/repos?page=$page | grep -e 'git_url*' | cut -d " -f 4 | xargs -L1 git clone
- $page=$page+1
+
+ curl -s "https://api.github.com/$cntx/$username/repos?page=$page" | grep -e 'git_url*' | cut -d \" -f 4 | xargs -L1 git clone
+ page=$[$page+1]
+
 done
 
 exit 0
-
 
 #git remote set-url origin https://github.com/mrdenchik/projectname.git
 

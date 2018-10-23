@@ -20,6 +20,9 @@ while [ $page -lt $max_page ]
 do
 
  curl -s "https://api.github.com/$cntx/$username/repos?page=$page" | grep -e 'git_url*' | cut -d \" -f 4 | xargs -L1 git clone
+
+ #curl -s "https://api.github.com/$cntx/$username/repos?page=$page" | grep -e '"name"' | cut -d \" -f 4
+
  page=$[$page+1]
 
 done

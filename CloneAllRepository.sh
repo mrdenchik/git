@@ -20,8 +20,9 @@ while [ $page -lt $max_page ]
 do
 
  #create directories and add set-url for each directories
- curl -s "https://api.github.com/$cntx/$username/repos?page=$page" | grep -e '"name"' | cut -d \" -f 4 | xargs -L1 -I{} bash -c "git clone git://github.com/$username/{}.git && \
- cd {} && git remote set-url origin https://github.com/$username/{}.git"
+ curl -s "https://api.github.com/$cntx/$username/repos?page=$page" | grep -e '"name"' | cut -d \" -f 4 | \
+  xargs -L1 -I{} bash -c "git clone git://github.com/$username/{}.git && \
+  cd {} && git remote set-url origin https://github.com/$username/{}.git"
 
  page=$[$page+1]
 
